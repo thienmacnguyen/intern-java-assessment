@@ -31,8 +31,8 @@ public class ArrayProcessor {
         return sum;
     }
 
-    public static int findAvarage(int[] numbers) {
-        int sum = ArrayProcessor.findSum(numbers);
+    public static double findAvarage(int[] numbers) {
+        double sum = ArrayProcessor.findSum(numbers);
         return sum/numbers.length;
     }
 
@@ -49,7 +49,7 @@ public class ArrayProcessor {
     public static int countOddNumbers(int[] numbers) {
         int oddNumbers = 0;
         for (int i = 0; i < numbers.length; i++) {
-            if (numbers[i] % 2 == 0) {
+            if (numbers[i] % 2 != 0) {
                 oddNumbers = oddNumbers + 1;
             }
         }
@@ -65,11 +65,9 @@ public class ArrayProcessor {
                 max = number;
             }
 
-            if (number > secondMax) {
+             else if (number > secondMax) {
                 secondMax = number;
             }
-
-            else return secondMax;
         }
         return secondMax;
     }

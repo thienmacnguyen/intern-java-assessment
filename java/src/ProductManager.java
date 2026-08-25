@@ -8,11 +8,23 @@ public class ProductManager {
 
     private final List<Product> products = new ArrayList<>();
     public void addProduct (Product p) {
+
+        if (p == null) {
+            throw new RuntimeException(
+                    "Chưa có sản phẩm nào"
+            );
+        }
+
+        if (isIdExist(p.getId())) {
+            throw new RuntimeException(
+                    "Sản phẩm đã tồn tại: " + p.getId()
+            );
+        }
         products.add(p);
     }
     public Product findById(String id) {
         if (id == null || products == null) {
-            return null;
+            throw new RuntimeException("Không tìm thấy sản phẩm:");
         }
         for (Product p : products) {
             if (p != null && p.getId() != null) {
@@ -36,6 +48,26 @@ public class ProductManager {
                 result.add(p);
             }
         }
+        return result;
+    }
+
+    public List<Product> findByCategory(String category) {
+
+        List<Product> result = new ArrayList<>();
+
+        if (category == null || category.trim().isEmpty()) {
+            return result;
+        }
+
+        String searchCategory = category.trim();
+
+        for (Product p : products) {
+
+            if (p.getCategory().equalsIgnoreCase(searchCategory)) {
+                result.add(p);
+            }
+        }
+
         return result;
     }
 
@@ -67,12 +99,27 @@ public class ProductManager {
     }
 
     public void updateQuantity(String id, int newQuantity) {
+        if (newQuantity < 0) {
+            throw new RuntimeException(
+                    "Số lượng không được âm"
+            );
+        }
         Product p = findById(id);
+        if (p == null) {
+            throw new RuntimeException(
+                    "Không tìm thấy sản phẩm: " + id
+            );
+        }
         p.setQuantity(newQuantity);
     }
 
     public void removeProduct(String id) {
         Product p = findById(id);
+        if (p == null) {
+            throw new RuntimeException(
+                    "Không tìm thấy sản phẩm: " + id
+            );
+        }
         products.remove(p);
     }
 

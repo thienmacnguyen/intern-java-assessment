@@ -8,7 +8,7 @@ public class StringProcessor {
         }
 
         text = text.trim();
-        String[] words = text.split(" ");
+        String[] words = text.trim().split("\\s+");
         return words.length;
     }
 
