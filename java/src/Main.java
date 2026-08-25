@@ -3,6 +3,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
+        // bổ sung test edge case và giao lại bài trước khi chuyển sang phần Spring nâng cao.
         int[] numbers = {5, 2, 8, 2, 10, -1, 8};
 
         int max = ArrayProcessor.findMax(numbers);
@@ -46,6 +47,7 @@ public class Main {
         System.out.println(manager.findByName("Laptop"));
 
         manager.sortByPriceDescending();
+        // Method đang sort giảm dần nhưng message bên dưới ghi tăng dần.
         System.out.println("Sắp xếp sản phẩm tăng dần");
         System.out.println(manager.getAllProducts());
 

@@ -1,3 +1,5 @@
+-- REVIEW [P2 - CẦN GIẢI THÍCH KHI REVIEW]: Script đang phụ thuộc ID cứng 1..4.
+-- Cách này chỉ phù hợp khi database hoàn toàn mới. Hãy tìm hiểu cách seed data không phụ thuộc ID vật lý.
 INSERT INTO departments (id, code, name) VALUES
 (1, 'DEV', 'Phát triển phần mềm'),
 (2, 'QA', 'Đảm bảo chất lượng'),

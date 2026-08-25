@@ -17,6 +17,8 @@ public class StringProcessor {
             return "";
         }
 
+        // REVIEW [P2 - CẦN SỬA]: Không nối String trong vòng lặp vì mỗi lần nối tạo object mới.
+        // Hãy dùng StringBuilder (ví dụ new StringBuilder(text).reverse().toString()).
         String result = "";
 
         for(int i = text.length() - 1; i >= 0; i--) {
