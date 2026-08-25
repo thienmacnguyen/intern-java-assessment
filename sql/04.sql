@@ -1,3 +1,6 @@
+-- REVIEW [P2 - CẦN BỔ SUNG GIẢI THÍCH]: Khi chạy lại script, INSERT có thể lỗi unique
+-- và UPDATE lương DEV sẽ tiếp tục tăng 10%. Hãy nêu cách dùng transaction/SELECT kiểm tra
+-- để chạy DML an toàn; không tự chạy script này nhiều lần trên dữ liệu dùng chung.
 -- 1. INSERT thêm một phòng ban mới
 INSERT INTO departments (code, name) 
 VALUES ('FIN', 'Tài chính Kế toán');

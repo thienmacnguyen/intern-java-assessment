@@ -3,6 +3,9 @@ import java.util.List;
 
 public class ArrayProcessor {
     public static int findMax(int[] numbers) {
+        // Chưa xử lý numbers == null hoặc numbers.length == 0.
+        // Hiện tại truy cập numbers[0] sẽ gây NullPointerException/ArrayIndexOutOfBoundsException.
+        // Hãy thống nhất cách xử lý cho toàn bộ ArrayProcessor (ví dụ: IllegalArgumentException hoặc OptionalInt).
         int max = numbers[0];
         for (int i = 1; i < numbers.length; i++) {
             if (numbers[i] > max) {
@@ -57,6 +60,10 @@ public class ArrayProcessor {
     }
 
     public static int findSecondMax(int[] numbers) {
+        // Logic này vẫn sai với dữ liệu trùng max. Ví dụ {5, 5} trả về 5,
+        // trong khi không có số lớn thứ hai PHÂN BIỆT.
+        // Cần chỉ cập nhật secondMax khi number < max và xử lý trường hợp không tồn tại kết quả.
+        // Cần test thêm: null, {}, {5}, {5, 5}, {5, 5, 4}, Integer.MIN_VALUE.
         int max = Integer.MIN_VALUE;
         int secondMax = Integer.MIN_VALUE;
         for (int number : numbers) {

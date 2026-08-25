@@ -23,6 +23,8 @@ public class ProductManager {
         products.add(p);
     }
     public Product findById(String id) {
+        // Contract hiện chưa nhất quán: id null thì ném RuntimeException, không tìm thấy lại trả null.
+        // Hãy chọn một cách rõ ràng cho hàm tìm kiếm
         if (id == null || products == null) {
             throw new RuntimeException("Không tìm thấy sản phẩm:");
         }
@@ -124,6 +126,8 @@ public class ProductManager {
     }
 
     public List<Product> getAllProducts() {
+        // unmodifiableList chỉ chặn add/remove từ bên ngoài; Product bên trong vẫn mutable.
+        // Hãy giải thích shallow copy và cách bảo vệ dữ liệu nếu cần snapshot an toàn.
         return Collections.unmodifiableList(products);
     }
 
