@@ -26,7 +26,7 @@ public class ProductManager {
         // Contract hiện chưa nhất quán: id null thì ném RuntimeException, không tìm thấy lại trả null.
         // Hãy chọn một cách rõ ràng cho hàm tìm kiếm
         if (id == null || products == null) {
-            throw new RuntimeException("Không tìm thấy sản phẩm:");
+            return null;
         }
         for (Product p : products) {
             if (p != null && p.getId() != null) {
@@ -35,7 +35,7 @@ public class ProductManager {
                 }
             }
         }
-        return null;
+        return  null;
     }
 
     public List<Product> findByName(String keyword) {
@@ -128,7 +128,24 @@ public class ProductManager {
     public List<Product> getAllProducts() {
         // unmodifiableList chỉ chặn add/remove từ bên ngoài; Product bên trong vẫn mutable.
         // Hãy giải thích shallow copy và cách bảo vệ dữ liệu nếu cần snapshot an toàn.
-        return Collections.unmodifiableList(products);
+        // Shallow copy là tạo list mới nhưng product vẫn là object cũ, list mới và list cũ cùng trỏ tới
+        // 1 object ví dụ xóa list có thể không ảnh hưởng gì nhưng set thông tin thì vẫn thay đôi object cũ
+        // cách bảo vệ đó là dùng deep copy cho từng product 1
+            List<Product> snapshot = new ArrayList<>();
+
+            for (Product p : products) {
+                Product copy = new Product(
+                        p.getId(),
+                        p.getName(),
+                        p.getCategory(),
+                        p.getPrice(),
+                        p.getQuantity()
+                );
+
+                snapshot.add(copy);
+            }
+
+            return Collections.unmodifiableList(snapshot);
     }
 
     private boolean isIdExist(String id) {

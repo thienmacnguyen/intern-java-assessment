@@ -13,11 +13,11 @@ public class Product {
         // Constructor đang gán trực tiếp field nên bỏ qua validation trong setPrice().
         // Vì vậy vẫn tạo được Product có id/name/category rỗng, price null/<= 0 hoặc quantity âm.
         // Hãy validate toàn bộ dữ liệu tại constructor hoặc gọi setter đã có validation.
-        this.id = id;
-        this.name = name;
-        this.category = category;
-        this.price = price;
-        this.quantity = quantity;
+        setId(id);
+        setName(name);
+        setCategory(category);
+        setPrice(price);
+        setQuantity(quantity);
     }
 
     public String getId() {
@@ -64,6 +64,9 @@ public class Product {
     }
 
     public void setQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Quantity cannot be negative");
+        }
         // Validation không nên chỉ nằm ở ProductManager. Gọi product.setQuantity(-1)
         // vẫn làm object rơi vào trạng thái không hợp lệ. Hãy kiểm tra quantity >= 0 tại đây.
         this.quantity = quantity;

@@ -4,6 +4,8 @@
 -- 1. INSERT thêm một phòng ban mới
 INSERT INTO departments (code, name) 
 VALUES ('FIN', 'Tài chính Kế toán');
+-- Chưa -> thêm, có -> bỏ qua
+ON CONFLICT (code) DO NOTHING;
 
 -- 2. INSERT thêm một nhân viên thuộc phòng ban vừa tạo FIN
 INSERT INTO employees (code, name, email, salary, hire_date, active, department_id)
@@ -23,9 +25,37 @@ SET email = 'an.nguyen.new@company.com'
 WHERE code = 'E001';
 
 -- 4. UPDATE salary tăng thêm 10% cho phòng ban DEV
-UPDATE employees 
-SET salary = salary * 1.10 
-WHERE department_id = (SELECT id FROM departments WHERE code = 'DEV');
+BEGIN;
+
+-- Kiểm tra trước
+SELECT code, name, salary
+FROM employees
+WHERE department_id = (
+    SELECT id
+    FROM departments
+    WHERE code = 'DEV'
+);
+
+-- Sau khi xác nhận đúng dữ liệu mới UPDATE
+UPDATE employees
+SET salary = salary * 1.10
+WHERE department_id = (
+    SELECT id
+    FROM departments
+    WHERE code = 'DEV'
+);
+
+-- Kiểm tra lại
+SELECT code, name, salary
+FROM employees
+WHERE department_id = (
+    SELECT id
+    FROM departments
+    WHERE code = 'DEV'
+);
+
+COMMIT;
+-- ROLLBACK;
 
 -- 5. UPDATE active = FALSE cho một nhân viên theo employee code
 UPDATE employees 

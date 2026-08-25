@@ -3,6 +3,10 @@ import java.util.List;
 
 public class ArrayProcessor {
     public static int findMax(int[] numbers) {
+        if (numbers == null || numbers.length == 0) {
+            throw new IllegalArgumentException("Mảng không được null hoặc rỗng");
+        }
+
         // Chưa xử lý numbers == null hoặc numbers.length == 0.
         // Hiện tại truy cập numbers[0] sẽ gây NullPointerException/ArrayIndexOutOfBoundsException.
         // Hãy thống nhất cách xử lý cho toàn bộ ArrayProcessor (ví dụ: IllegalArgumentException hoặc OptionalInt).
@@ -60,21 +64,36 @@ public class ArrayProcessor {
     }
 
     public static int findSecondMax(int[] numbers) {
+        if (numbers == null || numbers.length < 2) {
+            throw new IllegalArgumentException(
+                    "Mảng phải chứa 2 phần tử trở lên"
+            );
+        }
         // Logic này vẫn sai với dữ liệu trùng max. Ví dụ {5, 5} trả về 5,
         // trong khi không có số lớn thứ hai PHÂN BIỆT.
         // Cần chỉ cập nhật secondMax khi number < max và xử lý trường hợp không tồn tại kết quả.
         // Cần test thêm: null, {}, {5}, {5, 5}, {5, 5, 4}, Integer.MIN_VALUE.
         int max = Integer.MIN_VALUE;
         int secondMax = Integer.MIN_VALUE;
+        boolean foundSecondMax = false;
         for (int number : numbers) {
             if (number > max) {
                 secondMax = max;
                 max = number;
             }
 
-             else if (number > secondMax) {
-                secondMax = number;
+            if(secondMax != max) {
+                foundSecondMax = true;
             }
+
+             else if (number > max && number > secondMax) {
+                secondMax = number;
+                foundSecondMax = true;
+            }
+        }
+
+        if (!foundSecondMax) {
+            throw new IllegalArgumentException(" Không tìm thấy secondMax ");
         }
         return secondMax;
     }

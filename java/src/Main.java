@@ -7,7 +7,31 @@ public class Main {
         int[] numbers = {5, 2, 8, 2, 10, -1, 8};
 
         int max = ArrayProcessor.findMax(numbers);
+//        try {
+//            ArrayProcessor.findMax(null);
+//        } catch (IllegalArgumentException e) {
+//            System.out.println(e.getMessage());
+//        }
+//
+//        try {
+//            ArrayProcessor.findMax(new int[]{});
+//        } catch (IllegalArgumentException e) {
+//            System.out.println(e.getMessage());
+//        }
+
         int min = ArrayProcessor.findMin(numbers);
+//        try {
+//            ArrayProcessor.findMin(null);
+//        } catch (IllegalArgumentException e) {
+//            System.out.println("findMin null: " + e.getMessage());
+//        }
+//
+//        try {
+//            ArrayProcessor.findMin(new int[]{});
+//        } catch (IllegalArgumentException e) {
+//           System.out.println("findMin empty: " + e.getMessage());
+//        }
+
         int sum = ArrayProcessor.findSum(numbers);
         double average = ArrayProcessor.findAvarage(numbers);
         int evenNumbers = ArrayProcessor.countEvenNumbers(numbers);
@@ -46,9 +70,14 @@ public class Main {
         System.out.println(p003 != null ? p003 : "Không tìm thấy");
         System.out.println(manager.findByName("Laptop"));
 
+        manager.sortByPriceAscending();
+        System.out.println("Sắp xếp sản phẩm tăng dần");
+        System.out.println(manager.getAllProducts());
+
+
         manager.sortByPriceDescending();
         // Method đang sort giảm dần nhưng message bên dưới ghi tăng dần.
-        System.out.println("Sắp xếp sản phẩm tăng dần");
+        System.out.println("Sắp xếp sản phẩm giảm dần");
         System.out.println(manager.getAllProducts());
 
         System.out.println(
